@@ -4,10 +4,13 @@
 let grid;
 let cellWidth, cellHeight;
 
+const GRIDSIZE = 4; //a const can never be changed (because it is a variable in your code that shouldn't ever change)
+//consts are usually in all caps
+
 function setup() {
   createCanvas(windowWidth, windowHeight);
-  grid = generateRandomGrid(10);
-  strokeWeight(0.5);
+  grid = generateEmptyGrid(GRIDSIZE);
+  strokeWeight(0.2);
 
   cellWidth = width / grid[0].length;
   cellHeight = height / grid.length;
@@ -25,20 +28,31 @@ function generateRandomGrid(gridSize) {
     grid.push([]);
     for (let j=0; j<gridSize; j++) {
       if (random(100) < 50){
-        grid[i].push(0);
+        grid[i].push(1);
       }
       else {
-        grid[i].push(1);
+        grid[i].push(0);
       }
     }
   }
+  return grid;
+}
 
+function generateEmptyGrid(gridSize) {
+  //local variable: grid
+  let grid = [];
+  for (let i=0; i<gridSize; i++) {
+    grid.push([]);
+    for (let j=0; j<gridSize; j++) {
+      grid[i].push(0);
+    }
+  }
   return grid;
 }
 
 function keyPressed() {
   if (key === " ") {
-    grid = generateRandomGrid(10);
+    grid = generateEmptyGrid(4);
   }
 }
 
@@ -54,12 +68,23 @@ function mousePressed() {
   //console.log(xValue, yValue);
 
   //change the colour of the grid
-  //change the array value from 0 to 1
-  if (grid[cellY][cellX] === 0) {
-    grid[cellY][cellX] = 1;
-  }
-  else {
-    grid[cellY][cellX] = 0;
+  toggleCell(cellX, cellY); //self
+  
+  toggleCell(cellX, cellY-1); //north cell
+  toggleCell(cellX, cellY+1); //south
+  toggleCell(cellX+1, cellY); //east
+  toggleCell(cellX-1, cellY); //west
+
+}
+
+function toggleCell(cellX, cellY) {
+  if (cellX >= 0 && cellX < GRIDSIZE && cellY >= 0 && cellY < GRIDSIZE) {
+    if (grid[cellY][cellX] === 0) {
+      grid[cellY][cellX] = 1;
+    }
+    else {
+      grid[cellY][cellX] = 0;
+    }
   }
 }
 
@@ -83,11 +108,11 @@ function mousePressed() {
 function drawGrid() {
   for (let y=0; y<grid.length; y++) {
     for (let x=0; x<grid[y].length; x++) {
-      if (grid[y][x] === 0) {
-        fill("#611722");
+      if (grid[y][x] === 1) { 
+        fill("#c96526");
       }
       else {
-        fill("#dba0a9");
+        fill("#ded3cc");
       }
       
       rect(x*cellWidth, y*cellHeight, cellWidth, cellHeight);
