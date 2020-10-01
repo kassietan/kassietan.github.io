@@ -4,7 +4,7 @@
 let grid;
 let cellWidth, cellHeight;
 
-const GRIDSIZE = 10;
+const GRIDSIZE = 40;
 
 let autoPlay = false;
 
@@ -23,7 +23,7 @@ function draw() {
 
   // if you want it to "take turns" automatically
   if (autoPlay) {
-    if (frameCount % 30 === 0) {
+    if (frameCount % 10 === 0) {
       takeNextTurn();
     }
   }
