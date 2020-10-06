@@ -30,7 +30,7 @@ let widthOffset, heightOffset;
 let emptySpaceX, emptySpaceY;
 let winState = false;
 
-let myFont;  //might have to change to let = montserratFont BECAUSE i might want to use another font style for better UI
+let montserratSemiBoldFont, domineBoldFont;
 
 //in the preload()
 //gear = loadImage("assets/gear.png");
@@ -38,7 +38,8 @@ let myFont;  //might have to change to let = montserratFont BECAUSE i might want
 //image(gear, mouseX, mouseY);
 
 function preload() {
-  myFont = loadFont("assets/Montserrat-SemiBold.ttf");
+  montserratSemiBoldFont = loadFont("assets/Montserrat-SemiBold.ttf");
+  domineBoldFont = loadFont("assets/Domine-bold.ttf");
 }
 
 function setup() {
@@ -49,11 +50,18 @@ function setup() {
   //remember to fix!!!!
   //fix this!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
   //prob need an if/else statement to compare if the width or height is longer
-  sideLength = height/5;
+  if (height <= width) {
+    sideLength = height/5;
+  }
+  else {
+    sideLength = width/5;
+  }
+
   widthOffset = width/2-(sideLength*2);
   heightOffset = height/2-(sideLength*2);
-  textFont(myFont); //again, might have to change to let = montserratFont or whatever font you choose to use
 
+  //font style settings FOR THE NUMBERS THE NUMBERS THE NUMBERS
+  textFont(montserratSemiBoldFont); //again, might have to change to let = montserratFont or whatever font you choose to use
   textSize(sideLength/2);
   textAlign(CENTER);
 
@@ -75,7 +83,7 @@ function draw() {
 function drawBackground() {
   // background("#45252A");
   background("#764149");
-
+  
   //background pattern
   let forwardSlash = true;
   strokeWeight(1);
@@ -166,7 +174,7 @@ function displayGrid() {
         fill("#EEADA6"); //deep pink if correct
       }
       else {
-        fill("#F4CECE"); //("#C3D4D7"); //figure out a better coloour chocie
+        fill("#F7D0CC"); //("#C3D4D7"); //figure out a better colour chocie
       }
       rect(x*sideLength + widthOffset, y*sideLength + heightOffset, sideLength, sideLength, 15); ////remember to chagne the roundedness to a ratio of width or height
           //widthOffset = width/2-(sideLength*2) <-- centre width offset

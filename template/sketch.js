@@ -10,4 +10,6 @@ function setup() {
 }
 
 function draw() {
+  background("#F7D0CC");
+  stroke("#45252A");
 }
