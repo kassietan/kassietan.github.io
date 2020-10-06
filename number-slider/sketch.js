@@ -39,7 +39,7 @@ let montserratSemiBoldFont, domineBoldFont;
 
 function preload() {
   montserratSemiBoldFont = loadFont("assets/Montserrat-SemiBold.ttf");
-  domineBoldFont = loadFont("assets/Domine-bold.ttf");
+  domineBoldFont = loadFont("assets/Domine-Bold.ttf");
 }
 
 function setup() {
@@ -60,18 +60,47 @@ function setup() {
   widthOffset = width/2-(sideLength*2);
   heightOffset = height/2-(sideLength*2);
 
-  //font style settings FOR THE NUMBERS THE NUMBERS THE NUMBERS
-  textFont(montserratSemiBoldFont); //again, might have to change to let = montserratFont or whatever font you choose to use
-  textSize(sideLength/2);
-  textAlign(CENTER);
+
 
 }
 
 function draw() {
   drawBackground();
 
+  //draw the title
+  rectMode(CORNER);
+  strokeWeight(6);
+  stroke("#45252A");
+  fill("#45252A");
+  rect(0, 100, 90, 80, 0, 15, 15, 0);
+  rect(0, 190, 285, 80, 0, 15, 15, 0);
+
+  textFont(domineBoldFont);
+  textSize(50);
+  strokeWeight(3.5);
+  stroke("#F7D0CC");
+  textAlign(LEFT, CENTER);
+  text("16", 20, 95, 100, 80);
   
+  text("SQUARES", 20, 185, 295, 80);
+
+  
+  //draw the shuffle button 
+  strokeWeight(6);
+  stroke("#45252A");
+  fill("#45252A");
+  let restartButton = rect(width-90, height-180, 90, 80, 15, 0, 0, 15); //width-90 because rect width is 90
+  // height-180 because 100pixel distance from bottom and 80pixel height
+  
+  let questionButton = rect(width-90, height-270, 90, 80, 15, 0, 0, 15); //height-270 because (270 = 90+80+80+10)
+
+
   displayGrid();
+
+  //font style settings FOR THE NUMBERS THE NUMBERS THE NUMBERS
+  textFont(montserratSemiBoldFont); //again, might have to change to let = montserratFont or whatever font you choose to use
+  textSize(sideLength/2);
+  textAlign(CENTER, TOP);
   displayNumbers();
 
   findEmptySpace();
@@ -81,12 +110,11 @@ function draw() {
 }
 
 function drawBackground() {
-  // background("#45252A");
   background("#764149");
   
   //background pattern
   let forwardSlash = true;
-  strokeWeight(1);
+  strokeWeight(1); //should be ratio of width or something (but one is so small anyways...)
   stroke("#45252A");
   for (let x=0; x<width; x+=20) {
     for (let y=0; y<height; y+=20) {
@@ -105,21 +133,14 @@ function drawBackground() {
   strokeWeight(0);
   rectMode(CENTER);
 
-  // fill("#AF5868");
-  // rect(width/2, height/2, sideLength*4.5, sideLength*4.5, 15); //remember to chagne the roundedness to a ratio of width or height
-  
-  // fill("#F4CECE");
-  // rect(width/2 - 10, height/2 - 10, sideLength*4.2, sideLength*4.2, 15); //remember to chagne the roundedness to a ratio of width or height
-  
-  // fill("#EEADA6");
-  // rect(width/2 + 10, height/2 + 10, sideLength*4.2, sideLength*4.2, 15); //remember to chagne the roundedness to a ratio of width or height
-  
-  fill("#562F35");
+  //rectangular frame
+  fill("#45252A");
   rect(width/2, height/2, sideLength*4.3, sideLength*4.3, 15); //remember to chagne the roundedness to a ratio of width or height
 
-  strokeWeight(6);
-  fill("#AF5868"); //do i like this??
-  rect(width/2, height/2, sideLength*3, sideLength*3, 15);
+  //fill in the gaps from the rounded corners
+  strokeWeight(6); //should be ratio of width or something //why do i need the stroke weight if it only fills up the gaps???
+  fill("#9D4C5A");
+  rect(width/2, height/2, sideLength*3, sideLength*3, 15); //roundness should be ratio of width or something
 
 }
 
@@ -163,8 +184,8 @@ function createRandomGrid() {
 
 function displayGrid() {
   rectMode(CORNER);
-  stroke("#AF5868");
-  strokeWeight(6);
+  stroke("#9D4C5A");
+  strokeWeight(6); //should be ratio of width or something
   
   for (let y=0; y<GRIDSIZE; y++) {
     for (let x=0; x<GRIDSIZE; x++) {
@@ -174,7 +195,7 @@ function displayGrid() {
         fill("#EEADA6"); //deep pink if correct
       }
       else {
-        fill("#F7D0CC"); //("#C3D4D7"); //figure out a better colour chocie
+        fill("#F7D0CC"); //light pink if incorrect
       }
       rect(x*sideLength + widthOffset, y*sideLength + heightOffset, sideLength, sideLength, 15); ////remember to chagne the roundedness to a ratio of width or height
           //widthOffset = width/2-(sideLength*2) <-- centre width offset
@@ -191,7 +212,7 @@ function displayNumbers() {
   //reduce the computational strain duuude
   fill("#562F35");
   stroke("#45252A");
-  strokeWeight(5);
+  strokeWeight(5);  //stroke weight should be ratio of width or something
 
   for (let y=0; y<GRIDSIZE; y++) {
     for (let x=0; x<GRIDSIZE; x++) {
