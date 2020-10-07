@@ -60,8 +60,10 @@ function setup() {
   widthOffset = width/2-(sideLength*2);
   heightOffset = height/2-(sideLength*2);
 
-
-
+  //delete later
+  console.log("width is " +width);
+  console.log("height is " +height);
+ 
 }
 
 function draw() {
@@ -81,7 +83,6 @@ function draw() {
   stroke("#F7D0CC");
   textAlign(LEFT, CENTER);
   text("16", 20, 95, 100, 80);
-  
   text("SQUARES", 20, 185, 295, 80);
 
   
@@ -91,9 +92,12 @@ function draw() {
   fill("#45252A");
   let restartButton = rect(width-90, height-180, 90, 80, 15, 0, 0, 15); //width-90 because rect width is 90
   // height-180 because 100pixel distance from bottom and 80pixel height
-  
   let questionButton = rect(width-90, height-270, 90, 80, 15, 0, 0, 15); //height-270 because (270 = 90+80+80+10)
 
+  strokeWeight(3.5);
+  stroke("#F7D0CC");
+  textAlign(CENTER, CENTER);
+  text("R", width-45, height-145); //width-90+45 and height-180+40+5
 
   displayGrid();
 
@@ -112,7 +116,7 @@ function draw() {
 function drawBackground() {
   background("#764149");
   
-  //background pattern
+  //draw the background diagonal line pattern
   let forwardSlash = true;
   strokeWeight(1); //should be ratio of width or something (but one is so small anyways...)
   stroke("#45252A");
@@ -129,7 +133,7 @@ function drawBackground() {
     forwardSlash = !forwardSlash;
   }
 
-  //background rectangles
+  //background rectangles styles
   strokeWeight(0);
   rectMode(CENTER);
 
@@ -138,7 +142,6 @@ function drawBackground() {
   rect(width/2, height/2, sideLength*4.3, sideLength*4.3, 15); //remember to chagne the roundedness to a ratio of width or height
 
   //fill in the gaps from the rounded corners
-  strokeWeight(6); //should be ratio of width or something //why do i need the stroke weight if it only fills up the gaps???
   fill("#9D4C5A");
   rect(width/2, height/2, sideLength*3, sideLength*3, 15); //roundness should be ratio of width or something
 
@@ -230,6 +233,11 @@ function displayNumbers() {
 //or at least change it when pressing on something
 
 function mousePressed() { //mouse must be pressed down (release not needed for function to be called)
+
+  //delete later
+  console.log("mouseX is " + mouseX + ", and mouseY is " +mouseY);
+
+
   if (winState === false) {
     if (mouseX >= widthOffset && mouseX <= width-widthOffset && mouseY >= heightOffset && mouseY <= height-heightOffset) {    
       //RIGHT square
