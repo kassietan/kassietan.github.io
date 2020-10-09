@@ -5,6 +5,7 @@
 // Extra for Experts:
 // - I spent a lot of time working on the visual design of the code
 // - my efforts were spent on the UI
+// - I (might) continue working on this for my major project by creating some sort of auto-solve function (this is, of course, subject to change)
 
 
 const GRIDSIZE = 4;
